@@ -139,16 +139,16 @@ async function run() {
   if (!pr || !previewUrl) return;
 
   const timestamp = formatTimestamp(timezone);
+  const shortSha = context.sha.substring(0, 7);
+  const inspectUrl = `https://dash.cloudflare.com/${accountId}/pages/view/${projectName}`;
   const commentBody = [
-    `### Cloudflare Pages Deployment`,
+    `## 🚀 Deploying your latest changes`,
     ``,
-    `| | |`,
-    `|---|---|`,
-    `| **Status** | ✅ Deployed successfully |`,
-    `| **Preview URL** | ${previewUrl} |`,
-    `| **Project** | \`${projectName}\` |`,
-    `| **Branch** | \`${branch || 'default'}\` |`,
-    `| **Deployed at** | ${timestamp} |`,
+    `| Name | Status | Preview | Updated (${timezone}) |`,
+    `|------|--------|---------|----------------------|`,
+    `| ${projectName} | ✅ Ready ([Inspect](${inspectUrl})) | 🔗 [Visit Preview](${previewUrl}) | ${timestamp} |`,
+    ``,
+    `**Latest commit:** \`${shortSha}\``,
   ].join('\n');
 
   let comment;
