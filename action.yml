@@ -1,0 +1,57 @@
+name: Cloudflare Pages Deploy
+description: Deploy to Cloudflare Pages with GitHub Deployment status, PR comments, and emoji reactions
+author: multiplai-tech
+
+inputs:
+  apiToken:
+    description: Cloudflare API token
+    required: true
+  accountId:
+    description: Cloudflare account ID
+    required: true
+  projectName:
+    description: Cloudflare Pages project name
+    required: true
+  directory:
+    description: Directory of built assets to deploy
+    required: true
+  workingDirectory:
+    description: Working directory to run wrangler from
+    required: false
+    default: '.'
+  branch:
+    description: Branch to deploy to on Cloudflare Pages
+    required: false
+  gitHubToken:
+    description: GitHub token for posting PR comments and deployment status
+    required: false
+  appId:
+    description: GitHub App ID for custom bot identity
+    required: false
+  privateKey:
+    description: GitHub App private key
+    required: false
+  installationId:
+    description: GitHub App installation ID
+    required: false
+  wranglerVersion:
+    description: Wrangler version to use
+    required: false
+    default: '3'
+  reactions:
+    description: |
+      Emoji reactions to add to the PR comment (one per line).
+      Valid values: +1, -1, laugh, confused, heart, hooray, rocket, eyes
+    required: false
+  timezone:
+    description: Timezone for deployment timestamps (e.g. Asia/Manila)
+    required: false
+    default: UTC
+
+outputs:
+  url:
+    description: The Cloudflare Pages preview URL
+
+runs:
+  using: node20
+  main: dist/index.js
